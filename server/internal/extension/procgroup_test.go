@@ -73,7 +73,7 @@ func waitHelperGone(t *testing.T, pidFile string, within time.Duration) {
 	if err != nil {
 		t.Fatalf("the fake never started its helper: %v", err)
 	}
-	for deadline := time.Now().Add(within); helperRunning(pid); time.Sleep(20 * time.Millisecond) {
+	for deadline := time.Now().Add(within); helperRunning(pid); time.Sleep(20 * time.Millisecond) { // sleep-ok: poll OS process table for child exit
 		if time.Now().After(deadline) {
 			t.Fatalf("helper %d is still running %v after the call returned", pid, within)
 		}

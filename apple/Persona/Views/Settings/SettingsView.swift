@@ -624,7 +624,7 @@ struct PhoneDataView: View {
     var body: some View {
         List {
             Section {
-                ForEach(PhoneDataSource.allCases) { s in
+                ForEach(PhoneDataSource.onThisDevice) { s in
                     HStack(spacing: Theme.Space.m) {
                         SourceIcon(source: s)
                         VStack(alignment: .leading, spacing: Theme.Space.xxs) {
@@ -658,7 +658,7 @@ struct PhoneDataView: View {
     }
 
     private func refresh() {
-        for s in PhoneDataSource.allCases { statuses[s] = PhoneAuthorization.status(s) }
+        for s in PhoneDataSource.onThisDevice { statuses[s] = PhoneAuthorization.status(s) }
     }
 
     private func set(_ s: PhoneDataSource, _ on: Bool) async {

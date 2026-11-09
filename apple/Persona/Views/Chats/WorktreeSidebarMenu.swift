@@ -90,7 +90,8 @@ struct WorktreeSidebarMenu: View, Equatable {
     private func menuIcon(_ session: Session) -> Image {
         let kind = AgentKind(session)
         guard let brand = kind.brand, let source = NSImage(named: brand) else {
-            return Image(systemName: Theme.Icon.commandLine)
+            let symbol = Theme.Icon.styled(Theme.Icon.commandLine, in: StyleSpec.current.icons)
+            return Image(nsImage: NSImage(systemSymbolName: symbol, accessibilityDescription: nil) ?? NSImage())
         }
         let size = NSSize(width: Theme.Size.markS, height: Theme.Size.markS)
         let image = NSImage(size: size, flipped: false) { rect in

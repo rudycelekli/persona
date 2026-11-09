@@ -106,7 +106,7 @@ func TestRemoteManifestLeavesNoConnectionOpen(t *testing.T) {
 			t.Fatalf("after %d manifest reads: %d server connections still open, goroutines %d -> %d, descriptors %d -> %d",
 				calls, conns, goroutines, g, fds, f)
 		}
-		time.Sleep(20 * time.Millisecond)
+		time.Sleep(20 * time.Millisecond) // sleep-ok: poll goroutines and /proc/self/fd until sockets close
 	}
 	t.Logf("after %d manifest reads: goroutines %d -> %d, descriptors %d -> %d", calls, goroutines, g, fds, f)
 }
